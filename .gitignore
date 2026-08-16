@@ -1,0 +1,36 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Testing and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local outputs, logs, and audit data
+outputs/
+logs/
+audit/
+*.log
+
+# Data exclusions
+data/private/
+data/raw/
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Azure / infrastructure local state
+.terraform/
+*.tfstate
+*.tfstate.*
