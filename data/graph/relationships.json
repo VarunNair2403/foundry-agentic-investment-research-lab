@@ -1,0 +1,487 @@
+{
+  "schema_version": "1.0",
+  "data_classification": "synthetic",
+  "disclaimer": "All relationships, facts, scenarios, and source references are fictional and intended solely for portfolio demonstration. This dataset must not be used for investment decisions.",
+  "relationship_types": [
+    {
+      "name": "HAS_EXPOSURE_TO",
+      "from_type": "Fund",
+      "to_type": "Sector",
+      "description": "Indicates that a fund has material synthetic exposure to a sector."
+    },
+    {
+      "name": "HAS_RISK",
+      "from_type": "Fund",
+      "to_type": "Risk",
+      "description": "Indicates that a risk is documented as relevant to a fund."
+    },
+    {
+      "name": "AFFECTED_BY",
+      "from_type": "Sector",
+      "to_type": "MarketEvent",
+      "description": "Indicates that a market-event scenario may affect a sector."
+    },
+    {
+      "name": "AMPLIFIED_BY",
+      "from_type": "Risk",
+      "to_type": "MarketEvent",
+      "description": "Indicates that a market-event scenario may increase the relevance or severity of a risk."
+    },
+    {
+      "name": "SUPPORTED_BY",
+      "from_type": "Fund",
+      "to_type": "SourceDocument",
+      "description": "Indicates that an approved source document supports fund information."
+    },
+    {
+      "name": "DOCUMENTED_IN",
+      "from_type": "Risk",
+      "to_type": "SourceDocument",
+      "description": "Indicates that an approved source document describes a risk."
+    },
+    {
+      "name": "EVENT_DOCUMENTED_IN",
+      "from_type": "MarketEvent",
+      "to_type": "SourceDocument",
+      "description": "Indicates that an approved source document describes a market-event scenario."
+    },
+    {
+      "name": "ANALYZED_IN",
+      "from_type": "Fund",
+      "to_type": "SourceDocument",
+      "description": "Indicates that an approved research note analyzes a fund."
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_horizon_technology",
+      "source": "fund_horizon_growth",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_technology",
+      "source_document_id": "doc_horizon_fund_profile",
+      "evidence_section": "Horizon Growth Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_horizon_healthcare",
+      "source": "fund_horizon_growth",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_healthcare",
+      "source_document_id": "doc_horizon_fund_profile",
+      "evidence_section": "Horizon Growth Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_horizon_technology_concentration",
+      "source": "fund_horizon_growth",
+      "type": "HAS_RISK",
+      "target": "risk_technology_concentration",
+      "source_document_id": "doc_horizon_fund_profile",
+      "evidence_section": "Horizon Growth Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_horizon_interest_rate",
+      "source": "fund_horizon_growth",
+      "type": "HAS_RISK",
+      "target": "risk_interest_rate_sensitivity",
+      "source_document_id": "doc_horizon_fund_profile",
+      "evidence_section": "Horizon Growth Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_horizon_profile",
+      "source": "fund_horizon_growth",
+      "type": "SUPPORTED_BY",
+      "target": "doc_horizon_fund_profile",
+      "source_document_id": "doc_horizon_fund_profile",
+      "evidence_section": "Horizon Growth Fund",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_horizon_outlook",
+      "source": "fund_horizon_growth",
+      "type": "ANALYZED_IN",
+      "target": "doc_horizon_growth_outlook",
+      "source_document_id": "doc_horizon_growth_outlook",
+      "evidence_section": "Horizon Growth Outlook Note",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_financials",
+      "source": "fund_northstar_income",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_financials",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_energy",
+      "source": "fund_northstar_income",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_energy",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_consumer_staples",
+      "source": "fund_northstar_income",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_consumer_staples",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_credit_spread",
+      "source": "fund_northstar_income",
+      "type": "HAS_RISK",
+      "target": "risk_credit_spread",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_interest_rate",
+      "source": "fund_northstar_income",
+      "type": "HAS_RISK",
+      "target": "risk_interest_rate_sensitivity",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_profile",
+      "source": "fund_northstar_income",
+      "type": "SUPPORTED_BY",
+      "target": "doc_northstar_fund_profile",
+      "source_document_id": "doc_northstar_fund_profile",
+      "evidence_section": "Northstar Income Fund",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_northstar_outlook",
+      "source": "fund_northstar_income",
+      "type": "ANALYZED_IN",
+      "target": "doc_northstar_income_outlook",
+      "source_document_id": "doc_northstar_income_outlook",
+      "evidence_section": "Northstar Income Outlook Note",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_technology",
+      "source": "fund_meridian_global",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_technology",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_healthcare",
+      "source": "fund_meridian_global",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_healthcare",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_financials",
+      "source": "fund_meridian_global",
+      "type": "HAS_EXPOSURE_TO",
+      "target": "sector_financials",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund > Mandate",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_foreign_exchange",
+      "source": "fund_meridian_global",
+      "type": "HAS_RISK",
+      "target": "risk_foreign_exchange",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_geopolitical",
+      "source": "fund_meridian_global",
+      "type": "HAS_RISK",
+      "target": "risk_geopolitical",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund > Research considerations",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_profile",
+      "source": "fund_meridian_global",
+      "type": "SUPPORTED_BY",
+      "target": "doc_meridian_fund_profile",
+      "source_document_id": "doc_meridian_fund_profile",
+      "evidence_section": "Meridian Global Fund",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_meridian_outlook",
+      "source": "fund_meridian_global",
+      "type": "ANALYZED_IN",
+      "target": "doc_meridian_global_outlook",
+      "source_document_id": "doc_meridian_global_outlook",
+      "evidence_section": "Meridian Global Outlook Note",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_technology_rate_increase",
+      "source": "sector_technology",
+      "type": "AFFECTED_BY",
+      "target": "event_rate_increase",
+      "source_document_id": "doc_rate_increase_scenario",
+      "evidence_section": "Hypothetical Rate-Increase Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_financials_rate_increase",
+      "source": "sector_financials",
+      "type": "AFFECTED_BY",
+      "target": "event_rate_increase",
+      "source_document_id": "doc_rate_increase_scenario",
+      "evidence_section": "Hypothetical Rate-Increase Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_financials_credit_spread",
+      "source": "sector_financials",
+      "type": "AFFECTED_BY",
+      "target": "event_credit_spread_widening",
+      "source_document_id": "doc_credit_spread_scenario",
+      "evidence_section": "Hypothetical Credit-Spread Widening Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_energy_supply_disruption",
+      "source": "sector_energy",
+      "type": "AFFECTED_BY",
+      "target": "event_energy_supply_disruption",
+      "source_document_id": "doc_energy_supply_scenario",
+      "evidence_section": "Hypothetical Energy Supply Disruption",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_consumer_staples_supply_disruption",
+      "source": "sector_consumer_staples",
+      "type": "AFFECTED_BY",
+      "target": "event_energy_supply_disruption",
+      "source_document_id": "doc_energy_supply_scenario",
+      "evidence_section": "Hypothetical Energy Supply Disruption",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_technology_trade_restrictions",
+      "source": "sector_technology",
+      "type": "AFFECTED_BY",
+      "target": "event_trade_restrictions",
+      "source_document_id": "doc_trade_restriction_scenario",
+      "evidence_section": "Hypothetical Trade-Restriction Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_healthcare_trade_restrictions",
+      "source": "sector_healthcare",
+      "type": "AFFECTED_BY",
+      "target": "event_trade_restrictions",
+      "source_document_id": "doc_trade_restriction_scenario",
+      "evidence_section": "Hypothetical Trade-Restriction Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_financials_trade_restrictions",
+      "source": "sector_financials",
+      "type": "AFFECTED_BY",
+      "target": "event_trade_restrictions",
+      "source_document_id": "doc_trade_restriction_scenario",
+      "evidence_section": "Hypothetical Trade-Restriction Scenario",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_technology_concentration_rate_increase",
+      "source": "risk_technology_concentration",
+      "type": "AMPLIFIED_BY",
+      "target": "event_rate_increase",
+      "source_document_id": "doc_technology_concentration_risk_note",
+      "evidence_section": "Technology Concentration Risk",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_interest_rate_rate_increase",
+      "source": "risk_interest_rate_sensitivity",
+      "type": "AMPLIFIED_BY",
+      "target": "event_rate_increase",
+      "source_document_id": "doc_interest_rate_sensitivity_risk_note",
+      "evidence_section": "Interest-Rate Sensitivity Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_credit_spread_credit_widening",
+      "source": "risk_credit_spread",
+      "type": "AMPLIFIED_BY",
+      "target": "event_credit_spread_widening",
+      "source_document_id": "doc_credit_spread_risk_note",
+      "evidence_section": "Credit Spread Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_foreign_exchange_trade_restrictions",
+      "source": "risk_foreign_exchange",
+      "type": "AMPLIFIED_BY",
+      "target": "event_trade_restrictions",
+      "source_document_id": "doc_foreign_exchange_risk_note",
+      "evidence_section": "Foreign-Exchange Risk",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_geopolitical_energy_supply",
+      "source": "risk_geopolitical",
+      "type": "AMPLIFIED_BY",
+      "target": "event_energy_supply_disruption",
+      "source_document_id": "doc_geopolitical_risk_note",
+      "evidence_section": "Geopolitical Risk",
+      "confidence": "medium",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_geopolitical_trade_restrictions",
+      "source": "risk_geopolitical",
+      "type": "AMPLIFIED_BY",
+      "target": "event_trade_restrictions",
+      "source_document_id": "doc_geopolitical_risk_note",
+      "evidence_section": "Geopolitical Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_technology_concentration_document",
+      "source": "risk_technology_concentration",
+      "type": "DOCUMENTED_IN",
+      "target": "doc_technology_concentration_risk_note",
+      "source_document_id": "doc_technology_concentration_risk_note",
+      "evidence_section": "Technology Concentration Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_interest_rate_document",
+      "source": "risk_interest_rate_sensitivity",
+      "type": "DOCUMENTED_IN",
+      "target": "doc_interest_rate_sensitivity_risk_note",
+      "source_document_id": "doc_interest_rate_sensitivity_risk_note",
+      "evidence_section": "Interest-Rate Sensitivity Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_credit_spread_document",
+      "source": "risk_credit_spread",
+      "type": "DOCUMENTED_IN",
+      "target": "doc_credit_spread_risk_note",
+      "source_document_id": "doc_credit_spread_risk_note",
+      "evidence_section": "Credit Spread Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_foreign_exchange_document",
+      "source": "risk_foreign_exchange",
+      "type": "DOCUMENTED_IN",
+      "target": "doc_foreign_exchange_risk_note",
+      "source_document_id": "doc_foreign_exchange_risk_note",
+      "evidence_section": "Foreign-Exchange Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_geopolitical_document",
+      "source": "risk_geopolitical",
+      "type": "DOCUMENTED_IN",
+      "target": "doc_geopolitical_risk_note",
+      "source_document_id": "doc_geopolitical_risk_note",
+      "evidence_section": "Geopolitical Risk",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_rate_increase_document",
+      "source": "event_rate_increase",
+      "type": "EVENT_DOCUMENTED_IN",
+      "target": "doc_rate_increase_scenario",
+      "source_document_id": "doc_rate_increase_scenario",
+      "evidence_section": "Hypothetical Rate-Increase Scenario",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_credit_widening_document",
+      "source": "event_credit_spread_widening",
+      "type": "EVENT_DOCUMENTED_IN",
+      "target": "doc_credit_spread_scenario",
+      "source_document_id": "doc_credit_spread_scenario",
+      "evidence_section": "Hypothetical Credit-Spread Widening Scenario",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_energy_supply_document",
+      "source": "event_energy_supply_disruption",
+      "type": "EVENT_DOCUMENTED_IN",
+      "target": "doc_energy_supply_scenario",
+      "source_document_id": "doc_energy_supply_scenario",
+      "evidence_section": "Hypothetical Energy Supply Disruption",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    },
+    {
+      "id": "rel_trade_restrictions_document",
+      "source": "event_trade_restrictions",
+      "type": "EVENT_DOCUMENTED_IN",
+      "target": "doc_trade_restriction_scenario",
+      "source_document_id": "doc_trade_restriction_scenario",
+      "evidence_section": "Hypothetical Trade-Restriction Scenario",
+      "confidence": "high",
+      "as_of_date": "2026-01-31"
+    }
+  ]
+}
