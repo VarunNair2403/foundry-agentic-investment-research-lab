@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "data_classification": "synthetic",
+  "disclaimer": "All entities, facts, scenarios, and documents in this dataset are fictional and intended solely for portfolio demonstration. This dataset must not be used for investment decisions.",
+  "nodes": [
+    {
+      "id": "fund_horizon_growth",
+      "type": "Fund",
+      "name": "Horizon Growth Fund",
+      "description": "A synthetic actively managed equity fund focused on companies with long-term growth potential.",
+      "strategy": "Growth equity",
+      "primary_region": "United States",
+      "source_document_id": "doc_horizon_fund_profile"
+    },
+    {
+      "id": "fund_northstar_income",
+      "type": "Fund",
+      "name": "Northstar Income Fund",
+      "description": "A synthetic multi-asset income fund designed to seek recurring income through diversified holdings.",
+      "strategy": "Multi-asset income",
+      "primary_region": "United States",
+      "source_document_id": "doc_northstar_fund_profile"
+    },
+    {
+      "id": "fund_meridian_global",
+      "type": "Fund",
+      "name": "Meridian Global Fund",
+      "description": "A synthetic global equity fund investing across developed and emerging markets.",
+      "strategy": "Global equity",
+      "primary_region": "Global",
+      "source_document_id": "doc_meridian_fund_profile"
+    },
+    {
+      "id": "sector_technology",
+      "type": "Sector",
+      "name": "Technology",
+      "description": "Synthetic sector classification covering software, hardware, semiconductors, and technology-enabled services."
+    },
+    {
+      "id": "sector_healthcare",
+      "type": "Sector",
+      "name": "Healthcare",
+      "description": "Synthetic sector classification covering pharmaceuticals, biotechnology, medical devices, and healthcare services."
+    },
+    {
+      "id": "sector_financials",
+      "type": "Sector",
+      "name": "Financials",
+      "description": "Synthetic sector classification covering banks, insurers, asset managers, and financial services."
+    },
+    {
+      "id": "sector_energy",
+      "type": "Sector",
+      "name": "Energy",
+      "description": "Synthetic sector classification covering integrated energy, exploration, renewable energy, and energy services."
+    },
+    {
+      "id": "sector_consumer_staples",
+      "type": "Sector",
+      "name": "Consumer Staples",
+      "description": "Synthetic sector classification covering essential consumer products, food, beverages, and household goods."
+    },
+    {
+      "id": "risk_technology_concentration",
+      "type": "Risk",
+      "name": "Technology Concentration Risk",
+      "description": "The risk that a fund with meaningful technology exposure may be disproportionately affected by developments in that sector.",
+      "severity": "High",
+      "source_document_id": "doc_technology_concentration_risk_note"
+    },
+    {
+      "id": "risk_interest_rate_sensitivity",
+      "type": "Risk",
+      "name": "Interest-Rate Sensitivity Risk",
+      "description": "The risk that changes in interest rates may affect the valuation, income profile, or financing conditions of portfolio holdings.",
+      "severity": "Medium",
+      "source_document_id": "doc_interest_rate_sensitivity_risk_note"
+    },
+    {
+      "id": "risk_credit_spread",
+      "type": "Risk",
+      "name": "Credit Spread Risk",
+      "description": "The risk that widening credit spreads may reduce the market value of credit-sensitive assets.",
+      "severity": "Medium",
+      "source_document_id": "doc_credit_spread_risk_note"
+    },
+    {
+      "id": "risk_foreign_exchange",
+      "type": "Risk",
+      "name": "Foreign-Exchange Risk",
+      "description": "The risk that currency movements may affect the value of investments held outside a fund's base currency.",
+      "severity": "Medium",
+      "source_document_id": "doc_foreign_exchange_risk_note"
+    },
+    {
+      "id": "risk_geopolitical",
+      "type": "Risk",
+      "name": "Geopolitical Risk",
+      "description": "The risk that political, trade, regulatory, or conflict-related developments may affect markets and portfolio holdings.",
+      "severity": "Medium",
+      "source_document_id": "doc_geopolitical_risk_note"
+    },
+    {
+      "id": "event_rate_increase",
+      "type": "MarketEvent",
+      "name": "Hypothetical Rate-Increase Scenario",
+      "description": "A fictional scenario in which benchmark interest rates rise by 75 basis points over two policy meetings.",
+      "event_category": "Monetary policy",
+      "source_document_id": "doc_rate_increase_scenario"
+    },
+    {
+      "id": "event_credit_spread_widening",
+      "type": "MarketEvent",
+      "name": "Hypothetical Credit-Spread Widening Scenario",
+      "description": "A fictional scenario in which corporate credit spreads widen due to increased risk aversion.",
+      "event_category": "Credit markets",
+      "source_document_id": "doc_credit_spread_scenario"
+    },
+    {
+      "id": "event_energy_supply_disruption",
+      "type": "MarketEvent",
+      "name": "Hypothetical Energy Supply Disruption",
+      "description": "A fictional scenario in which an energy supply disruption increases commodity-price volatility.",
+      "event_category": "Commodity markets",
+      "source_document_id": "doc_energy_supply_scenario"
+    },
+    {
+      "id": "event_trade_restrictions",
+      "type": "MarketEvent",
+      "name": "Hypothetical Trade-Restriction Scenario",
+      "description": "A fictional scenario in which new trade restrictions disrupt supply chains and increase uncertainty for multinational companies.",
+      "event_category": "Geopolitics",
+      "source_document_id": "doc_trade_restriction_scenario"
+    },
+    {
+      "id": "doc_horizon_fund_profile",
+      "type": "SourceDocument",
+      "name": "Horizon Growth Fund Profile",
+      "document_category": "Fund profile",
+      "path": "data/documents/fund_profiles.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_northstar_fund_profile",
+      "type": "SourceDocument",
+      "name": "Northstar Income Fund Profile",
+      "document_category": "Fund profile",
+      "path": "data/documents/fund_profiles.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_meridian_fund_profile",
+      "type": "SourceDocument",
+      "name": "Meridian Global Fund Profile",
+      "document_category": "Fund profile",
+      "path": "data/documents/fund_profiles.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_technology_concentration_risk_note",
+      "type": "SourceDocument",
+      "name": "Technology Concentration Risk Note",
+      "document_category": "Risk note",
+      "path": "data/documents/risk_register.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_interest_rate_sensitivity_risk_note",
+      "type": "SourceDocument",
+      "name": "Interest-Rate Sensitivity Risk Note",
+      "document_category": "Risk note",
+      "path": "data/documents/risk_register.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_credit_spread_risk_note",
+      "type": "SourceDocument",
+      "name": "Credit Spread Risk Note",
+      "document_category": "Risk note",
+      "path": "data/documents/risk_register.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_foreign_exchange_risk_note",
+      "type": "SourceDocument",
+      "name": "Foreign-Exchange Risk Note",
+      "document_category": "Risk note",
+      "path": "data/documents/risk_register.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_geopolitical_risk_note",
+      "type": "SourceDocument",
+      "name": "Geopolitical Risk Note",
+      "document_category": "Risk note",
+      "path": "data/documents/risk_register.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_rate_increase_scenario",
+      "type": "SourceDocument",
+      "name": "Rate-Increase Scenario Brief",
+      "document_category": "Market-event scenario",
+      "path": "data/documents/market_events.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_credit_spread_scenario",
+      "type": "SourceDocument",
+      "name": "Credit-Spread Widening Scenario Brief",
+      "document_category": "Market-event scenario",
+      "path": "data/documents/market_events.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_energy_supply_scenario",
+      "type": "SourceDocument",
+      "name": "Energy Supply Disruption Scenario Brief",
+      "document_category": "Market-event scenario",
+      "path": "data/documents/market_events.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_trade_restriction_scenario",
+      "type": "SourceDocument",
+      "name": "Trade-Restriction Scenario Brief",
+      "document_category": "Market-event scenario",
+      "path": "data/documents/market_events.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_horizon_growth_outlook",
+      "type": "SourceDocument",
+      "name": "Horizon Growth Outlook Note",
+      "document_category": "Research note",
+      "path": "data/documents/research_notes.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_northstar_income_outlook",
+      "type": "SourceDocument",
+      "name": "Northstar Income Outlook Note",
+      "document_category": "Research note",
+      "path": "data/documents/research_notes.md",
+      "status": "Approved synthetic source"
+    },
+    {
+      "id": "doc_meridian_global_outlook",
+      "type": "SourceDocument",
+      "name": "Meridian Global Outlook Note",
+      "document_category": "Research note",
+      "path": "data/documents/research_notes.md",
+      "status": "Approved synthetic source"
+    }
+  ]
+}
