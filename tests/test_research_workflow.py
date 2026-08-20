@@ -51,3 +51,8 @@ def test_validator_rejects_missing_disclaimer() -> None:
     assert result["passed"] is False
     assert result["checks"]["approved_disclaimer_present_once"] is False
     assert result["details"]["approved_disclaimer_count"] == 0
+
+def test_workflow_uses_mock_provider_by_default() -> None:
+    workflow = ResearchWorkflow()
+
+    assert workflow.provider.provider_name == "mock"

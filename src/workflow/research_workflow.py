@@ -1,12 +1,22 @@
 from __future__ import annotations
 
 from datetime import UTC, datetime
-from typing import Any
+from typing import Any, Protocol
 from uuid import uuid4
 
 from src.graph.retriever import GraphRetriever
+from src.providers.foundry_provider import FoundryResearchProvider
 from src.providers.mock_provider import MockResearchProvider
 from src.validators.draft_validator import validate_draft
+
+
+class ResearchProvider(Protocol):
+    """Minimal interface required by the research workflow."""
+
+    provider_name: str
+
+    def generate_draft(self, evidence_package: dict[str, Any]) -> str:
+        """Return a draft grounded in the supplied evidence package."""
 
 
 class ResearchWorkflow:
@@ -15,10 +25,21 @@ class ResearchWorkflow:
     def __init__(
         self,
         retriever: GraphRetriever | None = None,
-        provider: MockResearchProvider | None = None,
+        provider: ResearchProvider | None = None,
     ) -> None:
         self.retriever = retriever or GraphRetriever()
         self.provider = provider or MockResearchProvider()
+
+    @classmethod
+    def with_foundry(
+        cls,
+        retriever: GraphRetriever | None = None,
+    ) -> ResearchWorkflow:
+        """Create an explicit live Foundry workflow."""
+        return cls(
+            retriever=retriever,
+            provider=FoundryResearchProvider(),
+        )
 
     def run(self, fund_name: str) -> dict[str, Any]:
         evidence_package = self.retriever.get_evidence_package(fund_name)
