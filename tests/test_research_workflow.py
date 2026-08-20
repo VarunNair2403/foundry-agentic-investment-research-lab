@@ -56,3 +56,28 @@ def test_workflow_uses_mock_provider_by_default() -> None:
     workflow = ResearchWorkflow()
 
     assert workflow.provider.provider_name == "mock"
+
+def test_workflow_writes_expected_trace_events(
+    tmp_path,
+) -> None:
+    import json
+
+    workflow = ResearchWorkflow(trace_directory=tmp_path)
+    result = workflow.run("Horizon Growth Fund")
+
+    trace_path = tmp_path / f"{result['request_id']}.jsonl"
+    trace_events = [
+        json.loads(line)
+        for line in trace_path.read_text().splitlines()
+    ]
+
+    assert [event["event_name"] for event in trace_events] == [
+        "RETRIEVAL_STARTED",
+        "RETRIEVAL_COMPLETED",
+        "DRAFT_GENERATION_STARTED",
+        "DRAFT_GENERATION_COMPLETED",
+        "VALIDATION_COMPLETED",
+    ]
+    assert all(event["request_id"] == result["request_id"] for event in trace_events)
+    assert trace_events[-1]["status"] == "SUCCESS"
+    assert trace_events[-1]["metadata"]["validation_passed"] is True
