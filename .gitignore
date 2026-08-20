@@ -34,3 +34,5 @@ Thumbs.db
 .terraform/
 *.tfstate
 *.tfstate.*
+# Generated evaluation reports
+evals/reports/*.json
