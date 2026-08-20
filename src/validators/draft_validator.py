@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 
@@ -12,7 +13,6 @@ PROHIBITED_TERMS = (
     "allocation recommendation",
 )
 
-
 REQUIRED_SECTIONS = (
     "## Scope",
     "## Fund Summary",
@@ -23,9 +23,8 @@ REQUIRED_SECTIONS = (
     "## Analyst Review Required",
 )
 
-
 APPROVED_DISCLAIMER = (
-    "it is not investment advice and does not support a buy, sell, hold, "
+    "It is not investment advice and does not support a buy, sell, hold, "
     "allocation, or price-target recommendation."
 )
 
@@ -35,31 +34,39 @@ def _normalize_text(text: str) -> str:
     return " ".join(text.lower().split())
 
 
+def _term_occurrences(text: str, term: str) -> int:
+    """Count a prohibited term only as a complete word or phrase."""
+    pattern = rf"(?<!\w){re.escape(term)}(?!\w)"
+    return len(re.findall(pattern, text))
+
+
 def validate_draft(
     draft: str,
     evidence_package: dict[str, Any],
 ) -> dict[str, Any]:
     """Run deterministic policy, structure, and evidence-source checks."""
-
     normalized_draft = _normalize_text(draft)
     normalized_disclaimer = _normalize_text(APPROVED_DISCLAIMER)
 
     disclaimer_count = normalized_draft.count(normalized_disclaimer)
-    draft_without_disclaimer = normalized_draft.replace(
-        normalized_disclaimer,
-        "",
-    )
+
+    prohibited_terms_found = []
+    for term in PROHIBITED_TERMS:
+        total_occurrences = _term_occurrences(normalized_draft, term)
+
+        allowed_occurrences = (
+            _term_occurrences(normalized_disclaimer, term)
+            if disclaimer_count == 1
+            else 0
+        )
+
+        if total_occurrences > allowed_occurrences:
+            prohibited_terms_found.append(term)
 
     missing_sections = [
         section
         for section in REQUIRED_SECTIONS
         if section not in draft
-    ]
-
-    prohibited_terms_found = [
-        term
-        for term in PROHIBITED_TERMS
-        if term in draft_without_disclaimer
     ]
 
     source_names = [
