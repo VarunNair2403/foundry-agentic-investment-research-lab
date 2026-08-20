@@ -36,3 +36,8 @@ Thumbs.db
 *.tfstate.*
 # Generated evaluation reports
 evals/reports/*.json
+
+# Keep audit source code; ignore only root-level generated audit records
+!src/audit/
+!src/audit/*.py
+/audit/
