@@ -81,3 +81,135 @@ def test_workflow_writes_expected_trace_events(
     assert all(event["request_id"] == result["request_id"] for event in trace_events)
     assert trace_events[-1]["status"] == "SUCCESS"
     assert trace_events[-1]["metadata"]["validation_passed"] is True
+
+
+def test_workflow_traces_and_reraises_retrieval_failure(tmp_path) -> None:
+    class FailingRetriever:
+        def get_evidence_package(self, fund_name: str) -> dict:
+            raise RuntimeError("Synthetic retrieval failure")
+
+    workflow = ResearchWorkflow(
+        retriever=FailingRetriever(),
+        trace_directory=tmp_path,
+    )
+
+    try:
+        workflow.run("Horizon Growth Fund")
+    except RuntimeError as error:
+        assert str(error) == "Synthetic retrieval failure"
+    else:
+        raise AssertionError("Expected retrieval failure to be re-raised")
+
+    trace_paths = list(tmp_path.glob("REQ-*.jsonl"))
+    assert len(trace_paths) == 1
+
+    import json
+
+    trace_events = [
+        json.loads(line)
+        for line in trace_paths[0].read_text().splitlines()
+    ]
+
+    assert [event["event_name"] for event in trace_events] == [
+        "RETRIEVAL_STARTED",
+        "RETRIEVAL_FAILED",
+    ]
+    assert trace_events[-1]["status"] == "FAILED"
+    assert trace_events[-1]["metadata"] == {
+        "error_type": "RuntimeError",
+        "error_message": "Synthetic retrieval failure",
+    }
+
+
+def test_workflow_traces_and_reraises_draft_generation_failure(
+    tmp_path,
+) -> None:
+    class FailingProvider:
+        provider_name = "failing-provider"
+
+        def generate_draft(self, evidence_package: dict) -> str:
+            raise RuntimeError("Synthetic draft generation failure")
+
+    workflow = ResearchWorkflow(
+        provider=FailingProvider(),
+        trace_directory=tmp_path,
+    )
+
+    try:
+        workflow.run("Horizon Growth Fund")
+    except RuntimeError as error:
+        assert str(error) == "Synthetic draft generation failure"
+    else:
+        raise AssertionError("Expected draft generation failure to be re-raised")
+
+    trace_paths = list(tmp_path.glob("REQ-*.jsonl"))
+    assert len(trace_paths) == 1
+
+    import json
+
+    trace_events = [
+        json.loads(line)
+        for line in trace_paths[0].read_text().splitlines()
+    ]
+
+    assert [event["event_name"] for event in trace_events] == [
+        "RETRIEVAL_STARTED",
+        "RETRIEVAL_COMPLETED",
+        "DRAFT_GENERATION_STARTED",
+        "DRAFT_GENERATION_FAILED",
+    ]
+    assert trace_events[-1]["status"] == "FAILED"
+    assert trace_events[-1]["metadata"] == {
+        "error_type": "RuntimeError",
+        "error_message": "Synthetic draft generation failure",
+    }
+
+
+def test_workflow_traces_and_reraises_validation_failure(
+    tmp_path,
+    monkeypatch,
+) -> None:
+    import json
+    import src.workflow.research_workflow as workflow_module
+
+    def failing_validate_draft(
+        draft: str,
+        evidence_package: dict,
+    ) -> dict:
+        raise RuntimeError("Synthetic validation failure")
+
+    monkeypatch.setattr(
+        workflow_module,
+        "validate_draft",
+        failing_validate_draft,
+    )
+
+    workflow = ResearchWorkflow(trace_directory=tmp_path)
+
+    try:
+        workflow.run("Horizon Growth Fund")
+    except RuntimeError as error:
+        assert str(error) == "Synthetic validation failure"
+    else:
+        raise AssertionError("Expected validation failure to be re-raised")
+
+    trace_paths = list(tmp_path.glob("REQ-*.jsonl"))
+    assert len(trace_paths) == 1
+
+    trace_events = [
+        json.loads(line)
+        for line in trace_paths[0].read_text().splitlines()
+    ]
+
+    assert [event["event_name"] for event in trace_events] == [
+        "RETRIEVAL_STARTED",
+        "RETRIEVAL_COMPLETED",
+        "DRAFT_GENERATION_STARTED",
+        "DRAFT_GENERATION_COMPLETED",
+        "VALIDATION_FAILED",
+    ]
+    assert trace_events[-1]["status"] == "FAILED"
+    assert trace_events[-1]["metadata"] == {
+        "error_type": "RuntimeError",
+        "error_message": "Synthetic validation failure",
+    }

@@ -68,6 +68,16 @@ class ResearchWorkflow:
                 trace_directory=self.trace_directory,
             )
 
+    @staticmethod
+    def _safe_error_metadata(error: Exception) -> dict[str, str]:
+        """Return bounded, non-secret error details for trace events."""
+        message = " ".join(str(error).split())
+
+        return {
+            "error_type": type(error).__name__,
+            "error_message": message[:200],
+        }
+
     def run(self, fund_name: str) -> dict[str, Any]:
         request_id = f"REQ-{uuid4().hex[:8].upper()}"
 
@@ -77,7 +87,17 @@ class ResearchWorkflow:
             "STARTED",
             {"requested_fund_name": fund_name.strip()},
         )
-        evidence_package = self.retriever.get_evidence_package(fund_name)
+        try:
+            evidence_package = self.retriever.get_evidence_package(fund_name)
+        except Exception as error:
+            self._trace(
+                request_id,
+                "RETRIEVAL_FAILED",
+                "FAILED",
+                self._safe_error_metadata(error),
+            )
+            raise
+
         self._trace(
             request_id,
             "RETRIEVAL_COMPLETED",
@@ -97,7 +117,17 @@ class ResearchWorkflow:
             "STARTED",
             {"provider": self.provider.provider_name},
         )
-        draft = self.provider.generate_draft(evidence_package)
+        try:
+            draft = self.provider.generate_draft(evidence_package)
+        except Exception as error:
+            self._trace(
+                request_id,
+                "DRAFT_GENERATION_FAILED",
+                "FAILED",
+                self._safe_error_metadata(error),
+            )
+            raise
+
         self._trace(
             request_id,
             "DRAFT_GENERATION_COMPLETED",
@@ -105,7 +135,17 @@ class ResearchWorkflow:
             {"provider": self.provider.provider_name},
         )
 
-        validation = validate_draft(draft, evidence_package)
+        try:
+            validation = validate_draft(draft, evidence_package)
+        except Exception as error:
+            self._trace(
+                request_id,
+                "VALIDATION_FAILED",
+                "FAILED",
+                self._safe_error_metadata(error),
+            )
+            raise
+
         self._trace(
             request_id,
             "VALIDATION_COMPLETED",
