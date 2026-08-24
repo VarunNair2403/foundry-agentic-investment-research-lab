@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+
 import json
+import sys
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -34,6 +36,8 @@ def main() -> None:
         f"{report['passed_cases']}/{report['total_cases']} passed"
     )
     print(f"Report written: {report_path.relative_to(PROJECT_ROOT)}")
+    if not report["passed"]:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
